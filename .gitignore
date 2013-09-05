@@ -1,1 +1,6 @@
 target/
+*.java
+.project
+.classpath
+.settings/
+bin/
