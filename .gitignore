@@ -1,5 +1,4 @@
 target/
-*.java
 .project
 .classpath
 .settings/
