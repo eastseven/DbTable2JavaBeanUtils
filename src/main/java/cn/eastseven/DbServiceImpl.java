@@ -46,36 +46,42 @@ public class DbServiceImpl implements DbService {
 			schemaPattern    = StringUtils.isBlank(conf.getString("db.schema.pattern")) ? null : conf.getString("db.schema.pattern");
 			tableNamePattern = StringUtils.isBlank(conf.getString("db.table.name.pattern")) ? null : conf.getString("db.table.name.pattern");
 			
+			logger.debug("tableNamePattern : " + tableNamePattern);
+			
 			Class.forName(conf.getString("db.driver"));
 			conn = DriverManager.getConnection(conf.getString("db.url"), conf.getString("db.username"), conf.getString("db.password"));
 			
 			databaseMetaData = conn.getMetaData();
-			rs = databaseMetaData.getTables(catalog, schemaPattern, tableNamePattern, types);
-			printDatabaseMetaData(databaseMetaData);
-			
-			while(rs.next()) {
-				Table table = new Table(rs.getString(Table.TABLE_CAT), rs.getString(Table.TABLE_SCHEM), rs.getString(Table.TABLE_NAME), rs.getString(Table.REMARKS));
-				logger.info(table);
-				ResultSet _rs = databaseMetaData.getColumns(catalog, schemaPattern, table.getName(), null);
-				//printResultSet(_rs);
-				Set<Column> columns = Sets.newHashSet();
-				while(_rs.next()) {
-					Column column = new Column();
-					column.setDataType(_rs.getInt(Column.DATA_TYPE));
-					column.setDefaultValue(_rs.getString(Column.COLUMN_DEF));
-					column.setName(_rs.getString(Column.COLUMN_NAME));
-					column.setNullable("YES".equals(_rs.getString(Column.IS_NULLABLE)));
-					column.setOrdinalPosition(_rs.getInt(Column.ORDINAL_POSITION));
-					column.setRemarks(_rs.getString(Column.REMARKS));
-					column.setSize(_rs.getInt(Column.COLUMN_SIZE));
-					column.setTypeName(_rs.getString(Column.TYPE_NAME));
-					columns.add(column);
-				}
+			String[] tableNames = tableNamePattern.split(DbService.DELIMITER);
+			for(String tablePattern : tableNames) {
+				logger.debug("tablePattern : "+tablePattern);
+				rs = databaseMetaData.getTables(catalog, schemaPattern, tablePattern, types);
+				printDatabaseMetaData(databaseMetaData);
 				
-				table.setColumns(columns);
-				tables.add(table);
-				logger.debug(table);
-				_rs.close();
+				while(rs.next()) {
+					Table table = new Table(rs.getString(Table.TABLE_CAT), rs.getString(Table.TABLE_SCHEM), rs.getString(Table.TABLE_NAME), rs.getString(Table.REMARKS));
+					logger.info(table);
+					ResultSet _rs = databaseMetaData.getColumns(catalog, schemaPattern, table.getName(), null);
+					//printResultSet(_rs);
+					Set<Column> columns = Sets.newHashSet();
+					while(_rs.next()) {
+						Column column = new Column();
+						column.setDataType(_rs.getInt(Column.DATA_TYPE));
+						column.setDefaultValue(_rs.getString(Column.COLUMN_DEF));
+						column.setName(_rs.getString(Column.COLUMN_NAME));
+						column.setNullable("YES".equals(_rs.getString(Column.IS_NULLABLE)));
+						column.setOrdinalPosition(_rs.getInt(Column.ORDINAL_POSITION));
+						column.setRemarks(_rs.getString(Column.REMARKS));
+						column.setSize(_rs.getInt(Column.COLUMN_SIZE));
+						column.setTypeName(_rs.getString(Column.TYPE_NAME));
+						columns.add(column);
+					}
+					
+					table.setColumns(columns);
+					tables.add(table);
+					logger.debug(table);
+					_rs.close();
+				}
 			}
 			
 		} catch (Exception e) {

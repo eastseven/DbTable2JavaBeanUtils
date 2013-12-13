@@ -43,25 +43,25 @@ empty string --- if it cannot be determined whether this is a generated column
  */
 public class Column {
 
-	public static final String TABLE_CAT = "TABLE_CAT";
-	public static final String TABLE_SCHEM = "TABLE_SCHEM";
-	public static final String TABLE_NAME = "TABLE_NAME";
-	public static final String COLUMN_NAME = "COLUMN_NAME";
-	public static final String DATA_TYPE = "DATA_TYPE";
-	public static final String TYPE_NAME = "TYPE_NAME";
-	public static final String COLUMN_SIZE = "COLUMN_SIZE";
-	public static final String DECIMAL_DIGITS = "DECIMAL_DIGITS";
-	public static final String NUM_PREC_RADIX = "NUM_PREC_RADIX";
-	public static final String NULLABLE = "NULLABLE";
-	public static final String REMARKS = "REMARKS";
-	public static final String COLUMN_DEF = "COLUMN_DEF";
-	public static final String ORDINAL_POSITION = "ORDINAL_POSITION";
-	public static final String IS_NULLABLE = "IS_NULLABLE";
-	public static final String SCOPE_CATALOG = "SCOPE_CATALOG";
-	public static final String SCOPE_SCHEMA = "SCOPE_SCHEMA";
-	public static final String SCOPE_TABLE = "SCOPE_TABLE";
-	public static final String SOURCE_DATA_TYPE = "SOURCE_DATA_TYPE";
-	public static final String IS_AUTOINCREMENT = "IS_AUTOINCREMENT";
+	public static final String TABLE_CAT          = "TABLE_CAT";
+	public static final String TABLE_SCHEM        = "TABLE_SCHEM";
+	public static final String TABLE_NAME         = "TABLE_NAME";
+	public static final String COLUMN_NAME        = "COLUMN_NAME";
+	public static final String DATA_TYPE          = "DATA_TYPE";
+	public static final String TYPE_NAME          = "TYPE_NAME";
+	public static final String COLUMN_SIZE        = "COLUMN_SIZE";
+	public static final String DECIMAL_DIGITS     = "DECIMAL_DIGITS";
+	public static final String NUM_PREC_RADIX     = "NUM_PREC_RADIX";
+	public static final String NULLABLE           = "NULLABLE";
+	public static final String REMARKS            = "REMARKS";
+	public static final String COLUMN_DEF         = "COLUMN_DEF";
+	public static final String ORDINAL_POSITION   = "ORDINAL_POSITION";
+	public static final String IS_NULLABLE        = "IS_NULLABLE";
+	public static final String SCOPE_CATALOG      = "SCOPE_CATALOG";
+	public static final String SCOPE_SCHEMA       = "SCOPE_SCHEMA";
+	public static final String SCOPE_TABLE        = "SCOPE_TABLE";
+	public static final String SOURCE_DATA_TYPE   = "SOURCE_DATA_TYPE";
+	public static final String IS_AUTOINCREMENT   = "IS_AUTOINCREMENT";
 	public static final String IS_GENERATEDCOLUMN = "IS_GENERATEDCOLUMN";
 	
 	private String name;
