@@ -6,8 +6,8 @@ import java.sql.Statement;
 import org.apache.log4j.Logger;
 
 import com.silio.db.DBOperate;
+
 import com.zobio.comm.Field;
-import com.zobio.comm.Message;
 import com.zobio.comm.Record;
 import com.zobio.comm.Table;
 
@@ -24,7 +24,6 @@ public class ${className} extends Record<Object> {
 		${propertyNames} ;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static void init() {
 		if (fields == null) {
 			fields = new Field[] {
