@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.lang.StringUtils;
@@ -17,7 +16,6 @@ import cn.eastseven.model.Column;
 import cn.eastseven.model.Table;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public class DbServiceImpl implements DbService {
 
@@ -63,7 +61,7 @@ public class DbServiceImpl implements DbService {
 					logger.info(table);
 					ResultSet _rs = databaseMetaData.getColumns(catalog, schemaPattern, table.getName(), null);
 					//printResultSet(_rs);
-					Set<Column> columns = Sets.newHashSet();
+					List<Column> columns = Lists.newArrayList();
 					while(_rs.next()) {
 						Column column = new Column();
 						column.setDataType(_rs.getInt(Column.DATA_TYPE));
@@ -74,7 +72,7 @@ public class DbServiceImpl implements DbService {
 						column.setRemarks(_rs.getString(Column.REMARKS));
 						column.setSize(_rs.getInt(Column.COLUMN_SIZE));
 						column.setTypeName(_rs.getString(Column.TYPE_NAME));
-						columns.add(column);
+						columns.add(column.getOrdinalPosition()-1, column);
 					}
 					
 					table.setColumns(columns);

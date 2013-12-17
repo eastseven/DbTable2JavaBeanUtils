@@ -1,6 +1,8 @@
 package cn.eastseven.model;
 
-import java.util.Set;
+import java.util.List;
+
+import com.google.common.collect.Lists;
 
 /**
  * TABLE_CAT String => table catalog (may be null)
@@ -37,7 +39,7 @@ public class Table {
 
 	private String remarks;
 
-	private Set<Column> columns;
+	private List<Column> columns = Lists.newArrayList();
 
 	public Table(String catalog, String schema, String name, String remarks) {
 		super();
@@ -79,18 +81,17 @@ public class Table {
 		this.remarks = remarks;
 	}
 
-	public Set<Column> getColumns() {
+	public List<Column> getColumns() {
 		return columns;
 	}
 
-	public void setColumns(Set<Column> columns) {
+	public void setColumns(List<Column> columns) {
 		this.columns = columns;
 	}
 
 	@Override
 	public String toString() {
-		return "Table [catalog=" + catalog + ", schema=" + schema + ", name="
-				+ name + ", remarks=" + remarks + ", columns=" + columns + "]";
+		return "Table [catalog=" + catalog + ", schema=" + schema + ", name=" + name + ", remarks=" + remarks + ", columns=" + columns + "]";
 	}
 
 }
