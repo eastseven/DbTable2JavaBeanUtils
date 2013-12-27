@@ -70,4 +70,8 @@ public class ${className} extends Record<Object> {
 
 	}
 
+	@SuppressWarnings("rawtypes")
+	public static Record get(String key) {
+		return records.getRecord(key);
+	}
 }
