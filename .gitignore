@@ -3,3 +3,8 @@ target/
 .classpath
 .settings/
 bin/
+
+.idea/
+*.iml
+
+*.java
