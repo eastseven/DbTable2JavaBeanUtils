@@ -8,3 +8,6 @@ bin/
 *.iml
 
 *.java
+
+build/
+lib/
