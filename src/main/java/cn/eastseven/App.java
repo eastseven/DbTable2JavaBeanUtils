@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
 
 import cn.eastseven.model.Column;
@@ -40,7 +42,11 @@ public class App {
 
 	}
 
-	private static void generateJavaBeanFile(List<Table> tables) throws IOException, TemplateException {
+	private static void generateJavaBeanFile(List<Table> tables) throws IOException, TemplateException, ConfigurationException {
+        PropertiesConfiguration conf = new PropertiesConfiguration("src/main/resources/generator.properties");
+        //final String path = conf.getString("dest.dir");
+        final String packageName = conf.getString("class.package");
+
 		Writer out = new OutputStreamWriter(System.out);
 		for (Table table : tables) {
 			freemarker.template.Configuration cfg = new freemarker.template.Configuration(); 
@@ -52,7 +58,7 @@ public class App {
 			String tableName = table.getName();
 			String className = getName(tableName);
 			
-			root.put("package", "cn.eastseven");
+			root.put("package", packageName);
 			root.put("className", className);
 			
 			List<Map<String, Object>> properties = Lists.newArrayList();
@@ -92,8 +98,8 @@ public class App {
 
 	/**
 	 * 格式化字段名称，去掉下划线，驼峰格式
-	 * @param target
-	 * @return
+	 * @param target 输入
+	 * @return 输出
 	 */
 	public static String getName(String target) {
 		String[] names = target.toLowerCase().split("_");

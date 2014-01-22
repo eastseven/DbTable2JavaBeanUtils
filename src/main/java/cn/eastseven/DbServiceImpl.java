@@ -52,8 +52,8 @@ public class DbServiceImpl implements DbService {
 			databaseMetaData = conn.getMetaData();
 			String[] tableNames = tableNamePattern.split(DbService.DELIMITER);
 			for(String tablePattern : tableNames) {
-				logger.debug("tablePattern : "+tablePattern);
 				rs = databaseMetaData.getTables(catalog, schemaPattern, tablePattern, types);
+				logger.debug("databaseMetaData.getTables(catalog="+catalog+", schemaPattern="+schemaPattern+", tablePattern="+tablePattern+", types="+types+")");
 				printDatabaseMetaData(databaseMetaData);
 				
 				while(rs.next()) {
